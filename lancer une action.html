@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page de Soumission d'Action</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <style>
+        /* styles.css */
+header {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    text-transform: uppercase;
+}
+
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.photo-upload {
+    padding: 20px;
+    border: 2px dashed #bdc3c7; /* Bordure pour le cadre de la photo */
+    border-radius: 10px;
+    background-color: #ecf0f1;
+    margin-bottom: 20px;
+}
+
+.comment-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1c40f;
+    border-radius: 10px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 10px;
+}
+
+.responsible-selection {
+    margin-top: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.confirmation-message {
+    background-color: #2ecc71; /* Couleur verte pour le message de confirmation */
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 20px; /* Espacement au-dessus du message */
+}
+
+footer {
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Écriture spéciale */
+    background-color: #2980b9;
+    color: white;
+    padding: 20px;
+    text-transform: uppercase;
+    margin-top: 40px; /* Espacement pour le pied de page */
+}
+
+    </style>
+    <header>
+        <h1>Bienvenue</h1>
+    </header>
+    <div class="container">
+        <!-- Case pour ajouter une photo -->
+        <div class="photo-upload">
+            <label for="photo-input">Ajouter une photo:</label>
+            <input type="file" id="photo-input" accept="image/*">
+        </div>
+
+        <!-- Case pour laisser un commentaire -->
+        <div class="comment-section">
+            <label for="comment-input">Laisser un commentaire:</label>
+            <textarea id="comment-input" rows="4" placeholder="Écrivez votre commentaire ici..."></textarea>
+        </div>
+
+        <!-- Case pour choisir un responsable -->
+        <div class="responsible-selection">
+            <label for="responsible-dropdown">Choisir un responsable:</label>
+            <select id="responsible-dropdown">
+                <option value="" disabled selected>Choisir un responsable...</option>
+                <option value="Resp1">Responsable 1</option>
+                <option value="Resp2">Responsable 2</option>
+                <option value="Resp3">Responsable 3</option>
+                <option value="Resp4">Responsable 4</option>
+                <option value="Resp5">Responsable 5</option>
+            </select>
+        </div>
+
+        <!-- Bouton Envoyer -->
+        <button id="send-button" onclick="sendAction()">Envoyer</button>
+
+        <!-- Message de confirmation -->
+        <div id="confirmation-message" class="confirmation-message" style="display:none;">
+            Votre action est lancée au responsable: <span id="responsible-name"></span>
+        </div>
+    </div>
+
+    <footer>
+        MArisk
+    </footer>
+    <script>
+        // script.js
+function sendAction() {
+    const responsibleDropdown = document.getElementById("responsible-dropdown");
+    const selectedResponsible = responsibleDropdown.value;
+
+    if (selectedResponsible) {
+        const confirmationMessage = document.getElementById("confirmation-message");
+        const responsibleName = responsibleDropdown.options[responsibleDropdown.selectedIndex].text;
+
+        // Afficher le message de confirmation avec le nom du responsable
+        document.getElementById("responsible-name").textContent = responsibleName;
+        confirmationMessage.style.display = "block";
+
+        // Cacher le message après 3 secondes
+        setTimeout(() => {
+            confirmationMessage.style.display = "none";
+        }, 3000);
+    }
+}
+
+    </script>
+</body>
